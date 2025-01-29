@@ -10,6 +10,14 @@ public class Package {
         this.services = services;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
     // Method to display package information
     public void displayInfo() {
         System.out.println("Package: " + name);

@@ -11,22 +11,29 @@ public class UserRepository {
     }
 
     public Optional<User> findById(int id) {
-        return users.stream().filter(user -> user.getId() == id).findFirst();
+        final int userId = id; // Создаём effectively final переменную
+        return users.stream().filter(user -> user.getId() == userId).findFirst();
     }
 
+
     public Optional<User> findByEmail(String email) {
-        return users.stream().filter(user -> user.getEmail().equalsIgnoreCase(email)).findFirst();
+        final String userEmail = email; // Создаём effectively final переменную
+        return users.stream().filter(user -> user.getEmail().equalsIgnoreCase(userEmail)).findFirst();
     }
+
 
     public User save(User user) {
         if (user.getId() == 0) { // Новый пользователь
             user = new User(nextId++, user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), user.getNumber());
             users.add(user);
         } else { // Обновление пользователя
-            users.replaceAll(u -> u.getId() == user.getId() ? user : u);
+            final int userId = user.getId(); // Создаём effectively final переменную
+            User finalUser = user;
+            users.replaceAll(u -> u.getId() == userId ? finalUser : u);
         }
         return user;
     }
+
 
     public void deleteById(int id) {
         users.removeIf(user -> user.getId() == id);
