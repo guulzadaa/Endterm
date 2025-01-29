@@ -64,6 +64,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     private String hashPassword(String password) {
-        return String.valueOf(password.hashCode()); // Простое хеширование (можно заменить на bcrypt)
+        return String.valueOf(password.hashCode());
     }
 }
